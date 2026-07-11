@@ -19,6 +19,8 @@ type FooterProps = {
 };
 
 export function Footer({ name, navItems, links = [] }: FooterProps) {
+  const visibleSocialLinks = links.filter((link) => !link.url.includes("notion.site"));
+
   return (
     <footer className="site-footer">
       <div className="container footer-content">
@@ -39,11 +41,11 @@ export function Footer({ name, navItems, links = [] }: FooterProps) {
             </ul>
           </nav>
         </div>
-        {links.length > 0 ? (
+        {visibleSocialLinks.length > 0 ? (
           <nav aria-label="Redes sociais">
             <p className="footer-label">Conecte-se</p>
             <ul className="footer-links">
-              {links.map((link) => (
+              {visibleSocialLinks.map((link) => (
                 <li key={link.url}>
                   <a className="social-link" href={link.url} {...getLinkSecurityProps(link.url)}>
                     <SocialIcon label={link.label} text={link.iconText} />
